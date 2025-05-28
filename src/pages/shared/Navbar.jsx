@@ -1,6 +1,21 @@
-import { NavLink } from "react-router";
+import { use } from "react";
+import { Link, NavLink, useNavigate } from "react-router";
+import AuthContext from "../../contexts/AuthContext";
 
 const Navbar = () => {
+  const authInfo=use(AuthContext);
+  const navigate=useNavigate
+  const {user,signOutUser}=authInfo;
+  const handleLogut=()=>{
+    signOutUser()
+    .then(()=>{
+      alert('user logout successfully')
+      navigate('/')
+    })
+    .catch((err)=>{
+      console.log(err.message)
+    })
+  }
   const menuItems=
   <>
    <li>  <NavLink to={`/`} className={({isActive})=>(isActive?"underline":'')}>Home</NavLink></li>
@@ -40,8 +55,16 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{menuItems}</ul>
       </div>
-      <div className="navbar-end">
-        <a className="btn">Button</a>
+      <div className="navbar-end space-x-1">
+        {
+          user && <p>{user.email}</p>
+        }
+        {
+         user
+         ? <Link onClick={()=>handleLogut()} className="btn btn-success">Logout</Link> 
+         : <Link className="btn btn-success" to={`/login`}>Login</Link>
+        }
+          
       </div>
     </div>
   );
