@@ -4,10 +4,7 @@ const JobsCard = ({ job }) => {
   const {
     _id,
     title,
-    category,
     location,
-    jobType,
-    applicationDeadline,
     description,
     company,
     salaryRange,
@@ -16,7 +13,7 @@ const JobsCard = ({ job }) => {
   } = job;
   return (
     <div className="card bg-base-100  shadow-md">
-      <div className="flex gap-2 pl-3">
+      <div className="flex gap-2 pl-3 items-center">
         <figure>
           <img className="w-16 h-16" src={company_logo} alt="company_logo" />
         </figure>
@@ -33,10 +30,10 @@ const JobsCard = ({ job }) => {
           {title}
           <div className="badge badge-secondary">NEW</div>
         </h2>
-        <p className="text-lg">
+        <p className="text-lg font-medium">
           Salary:{salaryRange.min}-{salaryRange.max}
         </p>
-        <p>{description}</p>
+        <p className="my-1 text-justify">{description}</p>
         <div className="card-actions ">
           {requirements.map((skill, idx) => (
             <div className="badge badge-outline" key={idx}>
@@ -44,9 +41,9 @@ const JobsCard = ({ job }) => {
             </div>
           ))}
         </div>
-        <div className="card-actions justify-end">
+        <div className=" my-3">
         <Link to={`jobs/${_id}`}>
-          <button className="btn btn-primary">Apply Now</button>
+          <button className="btn w-full btn-info text-white">Show Details</button>
         </Link>
         </div>
       </div>

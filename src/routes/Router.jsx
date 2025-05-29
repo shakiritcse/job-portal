@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router";
+import Loader from "../components/Loader";
 import RootLayout from "../layout/RootLayout";
 import Home from "../pages/Home/Home";
 import JobDetails from "../pages/JobDetails/JobDetails";
@@ -16,7 +17,9 @@ const router=createBrowserRouter([
             },
             {
              path:'/jobs/:id',
-             element:<JobDetails></JobDetails>
+             loader:({params})=>fetch(`http://localhost:5000/jobs/${params.id}`),
+             element:<JobDetails></JobDetails>,
+             hydrateFallbackElement:<Loader></Loader>
             },
             {
                 path:'/register',
