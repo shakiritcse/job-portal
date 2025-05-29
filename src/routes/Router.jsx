@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router";
 import RootLayout from "../layout/RootLayout";
 import Home from "../pages/Home/Home";
+import JobDetails from "../pages/JobDetails/JobDetails";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 
@@ -12,6 +13,10 @@ const router=createBrowserRouter([
             {
                 index:true,
                 Component:Home
+            },
+            {
+             path:'/jobs/:id',
+             element:<JobDetails></JobDetails>
             },
             {
                 path:'/register',
